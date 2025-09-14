@@ -142,7 +142,7 @@ ELEMENTOS TECNICOS:
 - Tarjetas con gradientes y animaciones
 - Badges para tecnologías y estados
 - Barras de progreso animadas
-- Tema matrix consistente
+- Tema matrix consistente.
 
 PROPOSITO:
 Demostrar capacidad de ejecución rápida y proyectos concretos que alinean con su visión futurista, mientras invita a colaboraciones.
