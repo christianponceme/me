@@ -1,0 +1,44 @@
+.cs-main-container {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cs-message-input {
+    border-top: 1px solid #444;
+}
+
+.cs-message--outgoing .cs-message__content {
+    background-color: #007bff;
+    color: white;
+}
+
+.cs-message--incoming .cs-message__content {
+    background-color: #333;
+    color: white;
+}
+
+.cs-typing-indicator__dot-container > div {
+    background-color: #aaa;
+}
+
+.chatbot-toggle-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cs-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
