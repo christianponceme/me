@@ -1,10 +1,25 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Zap, BrainCircuit, Infinity, Users, Dna } from "lucide-react"
-import { MatrixBackground } from "@/components/matrix-background"
-import { TechStack } from "@/components/projects-client-components"
+"use client"; // <-- ¡LA SOLUCIÓN! Esta línea convierte el componente a uno de cliente.
+
+import Link from "next/link";
+import dynamic from 'next/dynamic';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Zap, BrainCircuit, Infinity, Users, Dna } from "lucide-react";
+
+// --- OPTIMIZACIÓN: Carga dinámica de componentes pesados ---
+
+const MatrixBackground = dynamic(
+  () => import('@/components/matrix-background').then((mod) => mod.MatrixBackground),
+  { ssr: false }
+);
+
+const TechStack = dynamic(
+  () => import('@/components/projects-client-components').then((mod) => mod.TechStack),
+  { loading: () => <div className="text-center text-gray-400 p-8">Cargando stack tecnológico...</div> }
+);
+
+// -----------------------------------------------------------
 
 export default function MisProyectosPage() {
   return (
@@ -33,7 +48,7 @@ export default function MisProyectosPage() {
           </div>
         </div>
 
-        {/* Stack Tecnológico */}
+        {/* Stack Tecnológico (ahora cargado dinámicamente) */}
         <TechStack />
 
         {/* Proyectos Fundamentales */}
