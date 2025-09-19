@@ -184,18 +184,42 @@ const MatrixChatbot: React.FC = () => {
     setInputValue("");
     setIsTyping(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: inputValue,
+          sessionId: process.env.NEXT_PUBLIC_URL
+        }),
+      });
+
+      const data = await response.json();
+
       const botResponse: MessageType = {
         id: Date.now() + 1,
-        text: getBotResponse(inputValue),
+        text: data.message || "Lo siento, no pude procesar tu mensaje.",
         sender: "bot",
         timestamp: new Date().toLocaleTimeString(),
         isTyping: true
       };
 
       setMessages(prev => [...prev, botResponse]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorResponse: MessageType = {
+        id: Date.now() + 1,
+        text: "Error de conexión. Por favor, inténtalo de nuevo.",
+        sender: "bot",
+        timestamp: new Date().toLocaleTimeString(),
+        isTyping: true
+      };
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {

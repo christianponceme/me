@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 export const runtime = 'edge';
 export async function POST(req: NextRequest) {
-  const { message } = await req.json();
+  const { message, sessionId } = await req.json();
 
-  const n8nWebhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL;
+  const n8nWebhookUrl = process.env.N8N_API_KEY;
 
   if (!n8nWebhookUrl) {
     return NextResponse.json(
@@ -17,9 +17,8 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.N8N_API_KEY}`,
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ message, sessionId }),
     });
 
     const data = await response.json();
